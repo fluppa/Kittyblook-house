@@ -1,10 +1,10 @@
 @font-face {
-  font-family: "undertale";
+  font-family: 'undertale';
   src: url("resources/fonts/DeterminationMonoWebRegular-Z5oq.ttf");
 }
 
 @font-face {
-  font-family: "comic-sans";
+  font-family: 'comic-sans';
   src: url("resources/fonts/ComicSansMS3.ttf");
 }
 
@@ -77,7 +77,7 @@ body {
   width: 800px;
   left: 560px;
   top: 140px;
-  background-image: url("/resources/sprites/background-sprite-2.png");
+  background-image: url("/resources/sprites/backgroundSprite2.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
