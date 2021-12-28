@@ -77,7 +77,7 @@ body {
   width: 800px;
   left: 560px;
   top: 140px;
-  background-image: url("/resources/sprites/backgroundSprite2.png");
+  background-image: url("resources/sprites/backgroundSprite2.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
