@@ -1,7 +1,110 @@
-import writeDialogue from '/js-modules/dialogues.js'
-import playSong from '/js-modules/songsPlayer.js'
-import startSequence from '/js-modules/sequence.js'
+//import writeDialogue from '/js-modules/dialogues.js'
+//import playSong from '/js-modules/songsPlayer.js'
+//import startSequence from '/js-modules/sequence.js'
 
+////////////////
+function userClick() {
+  return new Promise((resolve) => {
+    document.querySelector('.dialogue-box').style.cursor = 'pointer'
+    document.querySelector('.dialogue-box').addEventListener('click', () => {
+      document.querySelector('.dialogue-box').style.cursor = 'default'
+      resolve()
+    })
+  })
+}
+
+function writePart(dialogue, i, text, audio) {
+  return new Promise((resolve) => {
+    let int = setInterval(() => {
+      if (audio !== 'none') audio.play()
+      text.innerHTML = text.innerHTML + dialogue[i]
+      i++
+      if (dialogue[i] == '\n') {
+        i++
+        clearInterval(int)
+        resolve(i)
+      } else if (i == dialogue.length) {
+        clearInterval(int)
+        resolve(i)
+      }
+    }, 100)
+  })
+}
+
+function writeDialogue(dialogue, audio, icon) {
+  let dialogueWrapper = document.createElement('div')
+  let cover = document.createElement('div')
+  cover.className = 'cover-map'
+  dialogueWrapper.innerHTML =
+    '<div class="dialogue-box"><div class="character-image"></div><div class="text"></div></div>'
+  document.querySelector('.game-wrapper').appendChild(dialogueWrapper)
+  if (icon == 'none') {
+    document.querySelector('.character-image').style.display = 'none'
+    document.querySelector('.text').style.width = '500px'
+    document.querySelector('.text').style.marginLeft = '50px'
+  } else {
+    document.querySelector('.character-image').style.backgroundImage = icon
+  }
+
+  document.body.appendChild(cover)
+  let text = document.querySelector('.text')
+
+  return new Promise(async (resolve) => {
+    let i = 0
+    while (i < dialogue.length) {
+      i = await writePart(dialogue, i, text, audio)
+      await userClick()
+      text.innerHTML = ''
+      if (i == dialogue.length) {
+        document.body.removeChild(cover)
+        document.querySelector('.game-wrapper').removeChild(dialogueWrapper)
+      }
+    }
+    resolve()
+  })
+}
+function playSong(song) {
+  return new Promise((resolve) => {
+    let cover = document.createElement('div')
+    document.querySelector('audio').pause()
+    cover.className = 'cover-map'
+    cover.addEventListener('click', () => {
+      document.body.removeChild(cover)
+      song.pause()
+
+      setTimeout(() => {
+        document.querySelector('audio').play()
+        resolve()
+      }, 10)
+    })
+    document.body.appendChild(cover)
+    song.play()
+  })
+}
+function startSequence(song) {
+  return new Promise((resolve) => {
+    let cover = document.createElement('div')
+    document.querySelector('audio').pause()
+    cover.className = 'sequence-map'
+    cover.addEventListener('click', () => {
+      document.querySelector('.sequence-map').style.opacity = '0'
+      setTimeout(() => {
+        document.body.removeChild(cover)
+        song.pause()
+        document.querySelector('audio').play()
+        resolve()
+      }, 15000)
+    })
+
+    document.body.appendChild(cover)
+    setTimeout(() => {
+      document.querySelector('.sequence-map').style.opacity = '1'
+    }, 1000)
+    song.play()
+  })
+}
+
+//
 const dialogue = {
   sans: 'Do you wanna hear a joke about voltage?\nOn five............\nJumped ten!!!\nhehehehehehehe\nhehehehe\nhe\nIt is funny you just need to be smart\n*wink*',
   tv: 'You start watching program about therapy for fat, depressed cats\nYou hear about diagnosing your cat with depression\n How to spot dark void in their eyes...\nYou start to wonder...\nWho could come up with idea for such insightful program',
