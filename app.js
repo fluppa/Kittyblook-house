@@ -118,7 +118,7 @@ const dialogue = {
   web: 'You spot something moving\nYou come closer...\nAnd closer...\nAnd even closer...\nYou are starting to hear some sound...\nOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOH\nTYPE\nThis is not a spider...\nIt is a bully!!!',
   papyrusIntro: 'You come to the window when suddenly you hear...',
   papyrus:
-    'NYEHEHEHEHEHE\nHUMAN YOU WALKED INTO MY EXTRAORDINARY TRAP\n ME, THE GREAT PAPYRUS, WILL NOW TORMENT YOUR SOUL\n WITH THE POWER OF THOUSAND MEOWS!!!',
+    'NYEHEHEHEHEHE\nHUMAN YOU WALKED RIGHT INTO MY TRAP\n ME, THE GREAT PAPYRUS, WILL NOW TORMENT YOUR SOUL\n WITH THE POWER OF THOUSAND MEOWS!!!',
 }
 
 const icon = {
@@ -154,7 +154,7 @@ titleScreen.addEventListener('click', () => {
 })
 
 document.querySelector('.interaction#sans').addEventListener('click', async () => {
-  document.body.style.fontFamily = 'Undertale Sans'
+  document.body.style.fontFamily = 'sans'
   await writeDialogue(dialogue.sans, audio.sans, icon.sans)
   document.body.style.fontFamily = 'undertale'
 })
@@ -185,7 +185,7 @@ document.querySelector('.interaction#napstablook').addEventListener('click', asy
 })
 
 document.querySelector('.interaction#cd-1').addEventListener('click', async () => {
-  writeDialogue('playing first cd', audio.none, icon.none)
+  writeDialogue('Playing first cd', audio.none, icon.none)
   await playSong(audio.cd1)
 })
 
@@ -195,13 +195,13 @@ document.querySelector('.interaction#cd-2').addEventListener('click', async () =
 })
 
 document.querySelector('.interaction#cd-3').addEventListener('click', async () => {
-  writeDialogue('playing third cd', audio.none, icon.none)
+  writeDialogue('Playing third cd', audio.none, icon.none)
   await playSong(audio.cd3)
 })
 
 document.querySelector('.interaction#papyrus').addEventListener('click', async () => {
   await writeDialogue(dialogue.papyrusIntro, audio.default, icon.none)
-  document.body.style.fontFamily = 'Undertale Papyrus'
+  document.body.style.fontFamily = 'papyrus'
   writeDialogue(dialogue.papyrus, audio.papyrus, icon.papyrus)
 
   await playSong(audio.papyrusSong)

@@ -4,8 +4,13 @@
 }
 
 @font-face {
-  font-family: 'comic-sans';
-  src: url("resources/fonts/ComicSansMS3.ttf");
+  font-family: 'papyrus';
+  src: url("resources/fonts/undertalepapyrus-webfont.ttf");
+}
+
+@font-face {
+  font-family: 'sans';
+  src: url("resources/fonts/undertalesans-webfont.ttf");
 }
 
 body {
